@@ -1,0 +1,8 @@
+[package]
+name = "eprom-pgrm"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ftdi = "0.1.3"
+ftdi-embedded-hal = "0.24.0"
