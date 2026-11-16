@@ -1,4 +1,4 @@
-use std::{fs, thread, time::Duration};
+use std::{thread, time::Duration};
 
 use ftdi::Interface;
 use ftdi_embedded_hal::{
@@ -35,20 +35,20 @@ fn main() {
         hal.ad7().unwrap(), // SR
     ];
 
-    for j in 0..10 {
-        let mut rom = Vec::new();
-        for i in 0_u16..=0x1FFF {
-            set_address(&mut address, i.checked_sub(1), i);
-            thread::sleep(Duration::from_millis(5));
-            rom.push(read_word(&data));
-            // print!("{:0<2X} ", read_word(&data));
+    // for j in 0..10 {
+    // let mut rom = Vec::new();
+    for i in 0_u16..=0x1FFF {
+        set_address(&mut address, i.checked_sub(1), i);
+        thread::sleep(Duration::from_millis(5));
+        // rom.push(read_word(&data));
+        // print!("{:0<2X} ", read_word(&data));
 
-            // println!("{i:0>13b} {:0>2X} ", read_word(&data));
-            // stdin().read_line(&mut String::new()).unwrap();
-        }
-
-        fs::write(format!("dumps/dump_{j}.bin"), rom).unwrap();
+        println!("{i:0>13b} {:0>2X} ", read_word(&data));
+        // stdin().read_line(&mut String::new()).unwrap();
     }
+
+    // fs::write(format!("dumps/dump_{j}.bin"), rom).unwrap();
+    // }
 }
 
 // sets the  13 address pins
