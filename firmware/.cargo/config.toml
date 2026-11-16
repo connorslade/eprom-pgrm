@@ -1,0 +1,13 @@
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+runner = "probe-rs run --speed 1000 --protocol swd --chip STM32C071FB"
+
+[build]
+target = "thumbv6m-none-eabi"
+
+# Reduces program size if needed.
+# [unstable]
+# build-std = ["core", "alloc"]
+# build-std-features = ["compiler-builtins-mem"]
+
+[env]
+DEFMT_LOG = "trace"
